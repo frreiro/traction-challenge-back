@@ -1,9 +1,9 @@
 import joi from "joi";
-import { AssetsInformation } from "../interfaces/assets.interfaces.js";
+import { AssetsBody } from "../interfaces/assets.interfaces.js";
 
-export const createAssetsSchema = joi.object<AssetsInformation>({
+
+export const createAssetsSchema = joi.object<AssetsBody>({
 	name: joi.string().required(),
-	image: joi.string().uri().required(),
 	description: joi.string().required(),
 	model: joi.string().required(),
 	owner: joi.string().required(),
@@ -12,9 +12,9 @@ export const createAssetsSchema = joi.object<AssetsInformation>({
 	company_unit_id: joi.string().required()
 });
 
-export const updateAssetsSchema = joi.object<AssetsInformation>({
+
+export const updateAssetsSchema = joi.object<AssetsBody>({
 	name: joi.string(),
-	image: joi.string().uri(),
 	description: joi.string(),
 	model: joi.string(),
 	owner: joi.string(),

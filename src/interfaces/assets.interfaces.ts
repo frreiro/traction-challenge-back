@@ -9,3 +9,5 @@ export interface AssetsInformation {
 	health_level: number;
 	company_unit_id: string;
 }
+
+export type AssetsBody = Omit<AssetsInformation, "image">;

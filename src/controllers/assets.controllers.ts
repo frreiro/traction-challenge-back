@@ -4,7 +4,9 @@ import * as assetsServices from "../services/assets.services.js";
 
 export async function registerAssets(req: Request, res: Response) {
 	const assetsDetails: AssetsInformation = req.body;
-	await assetsServices.createAsset(assetsDetails);
+	const file = req.file;
+	const imageUrl = await assetsServices.uploadImageInSupabaseAndGetUrl(file)
+	await assetsServices.createAsset({ ...assetsDetails, image: imageUrl });
 	res.sendStatus(201)
 }
 
