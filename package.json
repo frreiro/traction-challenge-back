@@ -8,7 +8,7 @@
 		"dev": "nodemon src/server.ts",
 		"build": "tsc",
 		"start": "node dist/server.js",
-		"seed": "ts-node src/db/seed.ts"
+		"seed": "ts-node src/config/seed.ts"
 	},
 	"author": "Lucas Viana",
 	"license": "ISC",
