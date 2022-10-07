@@ -35,12 +35,11 @@ export async function getCompanyOverView(companyId: string) {
 	const companyUnits = await unitsRepository.findUnitsByCompany(companyId);
 
 	for (const unit of companyUnits) {
-		console.log(unit)
 		const assets = await assetsRepository.findAssetsByUnit(unit._id);
 		unit.assets = assets
 		delete unit.company_id
 	}
-	return companyUnits;
+	return { ...company, ...companyUnits };
 }
 
 export async function updateCompanyData(companyId: string, updatedInfo: CompanyInformation) {
