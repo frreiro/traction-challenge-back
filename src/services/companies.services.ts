@@ -39,7 +39,7 @@ export async function getCompanyOverView(companyId: string) {
 		unit.assets = assets
 		delete unit.company_id
 	}
-	return { ...company, ...companyUnits };
+	return { ...company, units: companyUnits };
 }
 
 export async function updateCompanyData(companyId: string, updatedInfo: CompanyInformation) {
