@@ -9,13 +9,12 @@ import * as sessionRepository from "../repositories/sessions.repositories.js";
 export async function tokenValidate(headers: Request["headers"]) {
 	const { authorization } = headers;
 	if (!authorization) throw new AppError("No headers found", 401);
-	const token = authorization.split("Bearer").at(1).trim();
+	const token = authorization?.replace('Bearer ', '').trim();
 	if (token === "undefined" || null || undefined) throw new AppError("No token found", 401);
 	return token
 }
 
 export function encodeToken(id: string, isAdmin: boolean) {
-	console.log(id, isAdmin);
 	return jwt.sign({ id: id, is_admin: isAdmin }, process.env.JWT_KEY);
 }
 
