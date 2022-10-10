@@ -55,5 +55,6 @@ export async function deleteCompanyData(companyId: string) {
 		await assetsRepository.deleteAssetsByUnit(unit._id);
 	}
 	await unitsRepository.deleteUnitsByCompanyId(companyId);
+	await usersRepository.deleteUsersByCompany(companyId);
 	await companyRepository.deleteCompanyById(companyId);
 }

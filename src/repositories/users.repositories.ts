@@ -19,3 +19,7 @@ export async function findUserById(id: string) {
 export async function findUserByNameAndCompany(name: string, companyId: string) {
 	return await db.collection("users").findOne({ name: name, company_id: new ObjectId(companyId) });
 }
+
+export async function deleteUsersByCompany(companyId: string) {
+	return await db.collection("users").deleteMany({ company_id: new ObjectId(companyId) });
+}
