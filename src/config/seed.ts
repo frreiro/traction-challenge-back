@@ -23,7 +23,7 @@ const mongoClient = new MongoClient(process.env.MONGO_URL);
 
 try {
 	await mongoClient.connect();
-	db = mongoClient.db("traction_database_teste");
+	db = mongoClient.db("traction_database");
 	await createDefaultCompany();
 	await createDefaultUsers();
 	await createDefaultUnit()
