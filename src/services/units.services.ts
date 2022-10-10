@@ -23,12 +23,18 @@ export async function createUnit(unitInfo: UnitInformation) {
 }
 
 export async function getUnitData(unitId: string, userInformation: UserPayload) {
+	if (!ObjectId.isValid(unitId)) throw new AppError("Invalid unit", 404);
+
 	const userInfoFound = await usersRepository.findUserById(userInformation.id);
 	const unitInfoFound = await unitRepository.findUnitById(unitId);
+	const company = await companyRepository.findCompanyById(unitInfoFound.company_id);
+
 
 	if (!userInfoFound.company_id.equals(unitInfoFound.company_id) && !userInfoFound.is_admin) throw new AppError("User are not allowed to view this unit", 401);
+	const assets = await assetsRepository.findAssetsByUnit(new ObjectId(unitId));
 
-	return await assetsRepository.findAssetsByUnit(new ObjectId(unitId));
+	delete unitInfoFound.company_id;
+	return { ...unitInfoFound, company: company.name, assets };
 }
 
 

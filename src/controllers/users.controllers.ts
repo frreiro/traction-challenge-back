@@ -5,7 +5,9 @@ import * as usersServices from "../services/users.services.js";
 
 export async function registerUser(req: Request, res: Response) {
 	const userInfo: UserInformation = req.body;
-	await usersServices.createUser(userInfo);
+	const file = req.file;
+	const imageUrl = await usersServices.uploadImageInSupabaseAndGetUrl(file)
+	await usersServices.createUser({ ...userInfo, picture: imageUrl });
 	res.sendStatus(201)
 }
 

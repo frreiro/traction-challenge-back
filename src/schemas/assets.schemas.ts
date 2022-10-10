@@ -1,9 +1,10 @@
 import joi from "joi";
-import { AssetsBody } from "../interfaces/assets.interfaces.js";
+import { AssetsInformation } from "../interfaces/assets.interfaces.js";
 
 
-export const createAssetsSchema = joi.object<AssetsBody>({
+export const createAssetsSchema = joi.object<AssetsInformation>({
 	name: joi.string().required(),
+	image: joi.allow(),
 	description: joi.string().required(),
 	model: joi.string().required(),
 	owner: joi.string().required(),
@@ -13,7 +14,7 @@ export const createAssetsSchema = joi.object<AssetsBody>({
 });
 
 
-export const updateAssetsSchema = joi.object<AssetsBody>({
+export const updateAssetsSchema = joi.object<AssetsInformation>({
 	name: joi.string(),
 	description: joi.string(),
 	model: joi.string(),

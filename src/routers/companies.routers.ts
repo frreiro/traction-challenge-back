@@ -9,7 +9,7 @@ const companiesRouter = Router();
 
 companiesRouter.post('/company', adminHandler, schemaValidate(createOrUpdateCompanySchema), registerCompany);
 
-companiesRouter.get('/company', tokenHandler, getAllOrOneCompany);
+companiesRouter.get('/company', getAllOrOneCompany);
 
 companiesRouter.get('/company/:id', tokenHandler, getCompanyOverView);
 

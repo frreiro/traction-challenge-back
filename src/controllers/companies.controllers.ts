@@ -10,16 +10,9 @@ export async function registerCompany(req: Request, res: Response) {
 }
 
 export async function getAllOrOneCompany(req: Request, res: Response) {
-	const { userLogged } = res.locals;
+	const companies = await companyServices.getAllCompanies();
 
-	let companyOrCompanies = null;
-	if (userLogged.is_admin) {
-		companyOrCompanies = await companyServices.getAllCompanies();
-	} else {
-		companyOrCompanies = await companyServices.getUserCompany(userLogged.id);
-	}
-
-	res.send(companyOrCompanies)
+	res.send(companies)
 }
 
 export async function getCompanyOverView(req: Request, res: Response) {

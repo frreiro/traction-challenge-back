@@ -7,6 +7,7 @@ import AppError from "../utils/appError.js";
 import * as usersRepository from "../repositories/users.repositories.js";
 import * as sessionRepository from "../repositories/sessions.repositories.js";
 import * as companyRepository from "../repositories/companies.repositories.js";
+import { getImagePublicUrl, uploadToRemoteBucket } from "../utils/uploadSupabase.js";
 
 
 export async function createUser(userInformation: UserInformation) {
@@ -19,6 +20,11 @@ export async function createUser(userInformation: UserInformation) {
 	if (user) throw new AppError("User already exists", 409);
 
 	return await usersRepository.insertUser(userInformation);
+}
+
+export async function uploadImageInSupabaseAndGetUrl(file: Express.Multer.File) {
+	const newFileName = await uploadToRemoteBucket(file);
+	return await getImagePublicUrl(newFileName);
 }
 
 export async function getUsers() {
